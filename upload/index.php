@@ -77,7 +77,7 @@ if ($ok == "1")
 	$finalizedUrl = '' . $uploaddir . '/' . $random_filename . $_FILES['name'] . '.' . $ext . '';
 	$processedfilename = '' . $random_filename . '.' . $ext . '';
 	$url = 'i/' . $processedfilename . '';
-	print ('<a href="' . $url . '">' . $_FILES['file']['name'] . '</a><br />');
+	echo '<a href="' . $url . '">' . $_FILES['file']['name'] . '</a><br />';
 	exit;
 	}
   else
