@@ -39,4 +39,5 @@ The script should be installed and working. Modify config.php to your needs, and
 
 # Special thanks
 @trewq on LET (optimization)
+
 @Riz on LET (minor sanitation issues)
