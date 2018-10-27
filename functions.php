@@ -28,16 +28,13 @@ Please do not redistribute.
 require('config.php');
 
 if($_GET['a'] === 'count') {
-$files = glob($image_directory. '/*');
+      $files = glob($image_directory. '/*');
+      if ( $files !== false ) {
+          $filecount = count( $files );
+          echo $filecount - 1;
+      } else {
+          echo 0;
+      }
+}
 
-if ( $files !== false )
-{
-    $filecount = count( $files );
-    echo $filecount - 1;
-}
-else
-{
-    echo 0;
-}
-}
 ?>
