@@ -25,7 +25,7 @@ Step 1 - download the repository, or clone it.
     
 Step 2 - extract it!
 
-    unzip master.zip
+    unzip v2.zip
     
 Step 3 - moving the files to a web directory (`/var/www/html` for most Apache systems, and `/usr/share/nginx/html` for NGINX).
 
