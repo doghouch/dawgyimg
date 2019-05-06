@@ -21,7 +21,7 @@ Support can be obtained by opening a request, or sending an email to `admin@dawg
 Step 1 - download the repository, or clone it. 
 
     cd ~ 
-    wget https://github.com/doghouch/dawgyimg/archive/master.zip
+    wget https://github.com/doghouch/dawgyimg/archive/v2.zip
     
 Step 2 - extract it!
 
