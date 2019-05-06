@@ -1,5 +1,7 @@
 # DawgyIMG (v2!)
 
+**UPDATE**: DawgyIMG V2 is now out! This version is currently in BETA and should not be used in production until security bugs are ironed out completely.
+
 Originally written for `i.dawgy.pw`, now open-source.
 
 ### Want to buy me a cup of coffee?
