@@ -29,7 +29,7 @@ Step 2 - extract it!
     
 Step 3 - moving the files to a web directory (`/var/www/html` for most Apache systems, and `/usr/share/nginx/html` for NGINX).
 
-    cd dawgyimg-master
+    cd dawgyimg-2
     mv * /your/web/directory
     
 Step 4 - set permissions for /i (where images are stored).
