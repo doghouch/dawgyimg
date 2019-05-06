@@ -39,7 +39,6 @@ if (empty($_POST["csrf"])) {
 } else {
     // All checks passed - strip exif data before moving image
     $resp->status = "SUCCESS";
-    
     if (strtolower(substr(strrchr($_FILES["file"]["name"], "."), 1)) != "gif") {
         $i = new Imagick($_FILES["file"]["tmp_name"]);
         fixRotation($i);
