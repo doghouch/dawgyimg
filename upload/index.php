@@ -1,89 +1,69 @@
 <?php
-/*
 
-
-      dP                                          oo                     
-      88                                                                 
-.d888b88 .d8888b. dP  dP  dP .d8888b. dP    dP    dP 88d8b.d8b. .d8888b. 
-88'  `88 88'  `88 88  88  88 88'  `88 88    88    88 88'`88'`88 88'  `88 
-88.  .88 88.  .88 88.88b.88' 88.  .88 88.  .88    88 88  88  88 88.  .88 
-`88888P8 `88888P8 8888P Y8P  `8888P88 `8888P88    dP dP  dP  dP `8888P88 
-                                  .88      .88                       .88 
-                              d8888P   d8888P                    d8888P  
-
-
-Thank you for the donation! :)
-
-You can configure the simple image hosting script by modifying the variables below.
-
-DO NOT MODIFY THE ACTUAL CODE IF YOU DON'T KNOW WHAT YOU'RE DOING!
-
-This software is provided AS-IS and there are NO guarantees. However, if you should encounter
-a bug or error, please contact me at "admin@dawgy.pw."
-
-Please do not redistribute.
-
-*/
-
+require("../config.php");
+error_reporting(0);
+header("Content-Type: application/json");
 session_start();
-require ('../config.php');
 
-$uploaddir = '../' . $image_directory . '';
-$max_size = $image_size * 1000000;
-$extension = pathinfo($_FILES['file']['name']);
-$extension = $extension[extension];
-$allowed_paths = explode(", ", $image_extensions);
+function fixRotation($img) { 
+    $orientation = $img->getImageOrientation(); 
+    switch ($orientation) { 
+        case imagick::ORIENTATION_BOTTOMRIGHT: 
+            $img->rotateimage("#000", 180);
+            break; 
+        case imagick::ORIENTATION_RIGHTTOP: 
+            $img->rotateimage("#000", 90);
+            break; 
+        case imagick::ORIENTATION_LEFTBOTTOM: 
+            $img->rotateimage("#000", -90);
+            break; 
+    } 
+    $img->setImageOrientation(imagick::ORIENTATION_TOPLEFT); 
+} 
 
-for ($i = 0; $i < count($allowed_paths); $i++)
-	{
-	if ($allowed_paths[$i] == "$extension")
-		{
-		$ok = "1";
-		}
-	}
+if (empty($_POST["csrf"])) {
+    // Check if CSRF token = empty
+    $resp->status = "CSRF_EMPTY";
+} else if (!hash_equals($_SESSION["csrf"], $_POST["csrf"])) {
+    // Check if CSRF token = valid
+    $resp->status = "CSRF_INVALID";
+} else if (!in_array(strtolower(substr(strrchr($_FILES["file"]["name"], "."), 1)), $allowedExtensions)) {
+    // Check if file extension = $allowedExtensions
+    $resp->status = "DISALLOWED_EXT";
+} else if (exif_imagetype($_FILES["file"]["tmp_name"]) == false) {
+    // Check if image type = valid
+    $resp->status = "INVALID_IMAGE";
+} else if ($_FILES["file"]["size"] > $maxSizeInMb * 1000000) {
+    // Image too large
+    $resp->status = "IMAGE_SIZE";
+} else {
+    // All checks passed - strip exif data before moving image
+    $resp->status = "SUCCESS";
+    
+    if (strtolower(substr(strrchr($_FILES["file"]["name"], "."), 1)) != "gif") {
+        $i = new Imagick($_FILES["file"]["tmp_name"]);
+        fixRotation($i);
+        $profiles = $i->getImageProfiles("icc", true);
+        $i->stripImage();
+        if (!empty($profiles)) {
+            $i->profileImage("icc", $profiles['icc']);
+        }
+        $i->writeImage($_FILES["file"]["tmp_name"]);
+    }
+    // Generate a random name -- try again if name already exists
+    while (true) {
+        $finalName = bin2hex(random_bytes(5)) . "." . strtolower(substr(strrchr($_FILES["file"]["name"], "."), 1));
+        if (!file_exists("../i/" . $finalName)) break;
+    }
+    // Move image
+    move_uploaded_file($_FILES["file"]["tmp_name"], "../i/" . $finalName);
+    $resp->imageUrl = "i/" . $finalName;
+}
 
-if ($ok == "1")
-	{
-	if ($_FILES['file']['size'] > $max_size)
-		{
-		echo 'Image(s) must be smaller than ' . $image_size . 'MB!';
-		exit;
-		}
+// Convert name into HTML safe text
+$resp->fileName = htmlspecialchars($_FILES["file"]["name"]);
 
-	if (exif_imagetype($_FILES['file']['tmp_name']) == false)
-		{
-		die('One or more image(s) were invalid');
-		}
-
-	if (is_uploaded_file($_FILES['file']['tmp_name']))
-		{
-		$ext = pathinfo($_FILES['file']['name']);
-		$ext = $ext['extension'];
-		$ext = strtolower($ext);
-		$random1 = substr(hash('sha1', time() . uniqid()) , -5);
-		$random2 = substr(md5(time() . uniqid()) , -5);
-		$random_filename = '' . $random1 . '' . $random2 . '';
-
-		// $random_filename = uniqid(generateRandomString());
-
-		if (file_exists('' . $random_filename . '.' . $ext . ''))
-			{
-			die('Server Error, please try again later');
-			}
-
-		move_uploaded_file($_FILES['file']['tmp_name'], $uploaddir . '/' . $random_filename . "." . $ext);
-		}
-
-	$finalizedUrl = '' . $uploaddir . '/' . $random_filename . $_FILES['name'] . '.' . $ext . '';
-	$processedfilename = '' . $random_filename . '.' . $ext . '';
-	$url = 'i/' . $processedfilename . '';
-	echo '<a href="' . $url . '">' . $_FILES['file']['name'] . '</a><br />';
-	exit;
-	}
-  else
-	{
-	echo 'Empty/invalid submission';
-	exit;
-	}
+// Return JSON response
+echo json_encode($resp);
 
 ?>
