@@ -1,6 +1,6 @@
 # DawgyIMG (v2!)
 ### Welcome!
-**UPDATE**: DawgyIMG V2 is now out! This version is currently in BETA and should not be used in production until security bugs are ironed out completely.
+**UPDATE**: DawgyIMG V2 is now out! This version is currently in BETA and should not be used in production until bugs (validation, etc.) are ironed out completely.
 
 DawgyIMG has gone from being closed source to fully open source. Also, DawgyIMG is under the GPL GNU (v3) license (this means that you're free to modify, redistribute and create derivatives of this software so long as you are not doing so for profit).
 
