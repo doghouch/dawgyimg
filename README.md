@@ -38,9 +38,9 @@ Step 4 - set permissions for /i (where images are stored).
     
 ### Congratulations!
 
-The script should be installed and working. Modify config.php to your needs, and the background image is replaceable by changing `background.png` in the assets folder. Happy uploading!
+The script should be installed and working. Modify config.php to your needs, and the ~~background image is replaceable by changing `background.png` in the assets folder.~~ Happy uploading!
 
 # Special thanks (version one)
 @trewq on LET (optimization)
 
-@Riz on LET (minor sanitation issues)
+@Riz on LET (sanitation issues)
