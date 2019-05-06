@@ -1,17 +1,19 @@
-# DawgyIMG Intro
+# DawgyIMG (v2!)
 
 Originally written for `i.dawgy.pw`, now open-source.
 
-Thank you to the people that donated, and made this possible!
+### Want to buy me a cup of coffee?
 
-Donations help me update the software, as well as upgrade it to (cleaner) code :)
+Feel free to buy me a cup of joe!
 
 https://dawgy.pw/donate
+
+### Any questions?
 
 Support can be obtained by opening a request, or sending an email to `admin@dawgy.pw`.
 
 ### Prerequisites 
-- a server running PHP 5.4+
+- a server running PHP 7 or newer
 - unzip (duh!)
 
 ### Setup
@@ -37,7 +39,7 @@ Step 4 - set permissions for /i (where images are stored).
 
 The script should be installed and working. Modify config.php to your needs, and the background image is replaceable by changing `background.png` in the assets folder. Happy uploading!
 
-# Special thanks
+# Special thanks (version one)
 @trewq on LET (optimization)
 
 @Riz on LET (minor sanitation issues)
