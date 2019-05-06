@@ -4,11 +4,9 @@
 
 DawgyIMG has gone from being closed source to fully open source. Also, DawgyIMG is under the GPL GNU (v3) license (this means that you're free to modify, redistribute and create derivatives of this software so long as you are not doing so for profit).
 
-### Want to buy me a cup of coffee?
+### Donations
 
-Feel free to buy me a cup of joe!
-
-https://dawgy.pw/donate
+Feel free to buy me a cup of joe (https://dawgy.pw/donate)!
 
 # Installation
 ### Any questions?
