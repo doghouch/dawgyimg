@@ -1,14 +1,12 @@
 # DawgyIMG (v2!)
-### Welcome!
+## Welcome!
 **UPDATE**: DawgyIMG V2 is now out! This version is currently in BETA and should not be used in production until bugs (validation, etc.) are ironed out completely.
 
 DawgyIMG has gone from being closed source to fully open source. Also, DawgyIMG is under the GPL GNU (v3) license (this means that you're free to modify, redistribute and create derivatives of this software so long as you are not doing so for profit).
 
-### Donations
+Feel free to buy me a cup of joe (https://dawgy.pw/donate) if you like my work.
 
-Feel free to buy me a cup of joe (https://dawgy.pw/donate)!
-
-# Installation
+## Installation
 ### Any questions?
 
 Support can be obtained by opening a request, or sending an email to `admin@dawgy.pw`.
@@ -40,7 +38,7 @@ Step 4 - set permissions for /i (where images are stored).
 
 The script should be installed and working. Modify config.php to your needs, and the ~~background image is replaceable by changing `background.png` in the assets folder.~~ Happy uploading!
 
-# Special thanks (version one)
+## Special thanks (version one)
 @trewq on LET (optimization)
 
 @Riz on LET (sanitation issues)
